@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>My Python Game</h1>
+    <div id="game-container"></div>
+
+    <!-- Link Pyodide or Brython library -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/pyodide/v0.18.1/full/pyodide.js"></script>
+
+    <script type="text/python">
+        import random
+num = ''
+user = ''
+x = 0
+nome1 = ''
+nomec = ''
+userc = ''
+nome = []
+dif = []
+acertos = []
+y= ''
+z=''
+vartxt=''
+varnum=''
+rodada= []
+
+def trata_errol():
+    while True:
+        nome1 = input("Digite o seu nome ou sair para encerrar: ")
+        if nome1.lower() == "sair":
+            return "SAIR"
+        elif any(char.isdigit() for char in nome1):
+           print("Nomes não devem conter números, tente novamente.")
+        else:
+            return nome1
+
+def trataerron():
+    while True:
+        user = input("Você acha que é qual número? ")
+        try:
+            user = int(user)
+            return user
+            break
+        except:
+            print("Tente novamente, dado inválido.")
+
+def dificuldade():
+    while True:
+        x = input("Escolha entre fácil, médio e difícil. Digite F para fácil, M para médio e D para difícil: ")
+        x = x.upper()
+        if x == "F":
+            return "Nível fácil, 10"
+            break
+        elif x == "M":
+            return "Nível médio, 5"
+            break
+        elif x == "D":
+            return "Nível difícil, 3"
+            break
+        else:
+            print("Dificuldade inválida.")
+
+while True:
+    print("Jogo da adivinhação")
+    nome1 = trata_errol()
+    if nome1 == "SAIR":
+        break
+    else:
+        nome.append(nome1)
+        num = random.randint(1,100)
+        y = dificuldade()
+        z = y.split(", ")
+        vartxt= z[0]
+        dif.append(vartxt)
+        varnum=z[1]
+        varnum = int(varnum)
+        acertos.append("Jogo perdido")
+        for i in range(varnum):
+            print("Rodada",i+1,"de",varnum)
+            user = int(trataerron())
+            if user == num:
+                print("Parabéns, você acertou! O número sorteado é: ",num)
+                acertos.pop()
+                acertos.append("Jogo ganho")
+                break
+            else:
+                if num < user:
+                    print("O número é menor que o digitado!")
+                elif num > user:
+                    print("O número é maior que o digitado!")
+        print("O número era:", num)
+        print("\n")
+        rodada.append("jogo")
+nr= len(rodada)
+for i in range(nr):
+    print("\n")
+    print(nome[i])
+    print(dif[i])
+    print(acertos[i])
+
+        start_game()
+    </script>
+</body>
+</html>
